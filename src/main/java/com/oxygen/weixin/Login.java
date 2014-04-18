@@ -92,6 +92,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
        
+        logger.info(request.getParameterMap().toString());
         PrintStream out =new PrintStream(response.getOutputStream());
         out.println("from my local server");
     }

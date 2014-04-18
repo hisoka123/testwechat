@@ -94,7 +94,15 @@ public class Login extends HttpServlet {
        
         logger.info(request.getParameterMap().toString());
         PrintStream out =new PrintStream(response.getOutputStream());
-        out.println("from my local server");
+        String[] nonce=request.getParameterValues("nonce");
+        logger.info(Arrays.toString(nonce));
+        out.println("<xml>"+
+        "<ToUserName><![CDATA[oxygengj]]></ToUserName>"+
+        "<FromUserName><![CDATA[crazyoxygen@163.com]]></FromUserName>"+
+        "<CreateTime>201404182300</CreateTime>"+
+        "<MsgType><![CDATA[text]]></MsgType>"+
+        "<Content><![CDATA[你好]]></Content>"+
+        "</xml>");
     }
 
 }

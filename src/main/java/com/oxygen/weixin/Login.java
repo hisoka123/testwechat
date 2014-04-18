@@ -44,16 +44,17 @@ public class Login extends HttpServlet {
         temp[0] = token;
         temp[1] = timestamp;
         temp[2] = nonce;
-        logger.info(temp[0]);
+        logger.info(temp[0]+","+temp[1]+","+temp[2]);
         Arrays.sort(temp);
-        logger.info(temp[0]);
+        logger.info(temp[0]+","+temp[1]+","+temp[2]);
         String testStr=sha1(temp[0]+temp[1]+temp[2]);
         logger.info("testStr:"+ testStr);
         logger.info("signature:"+signature);
+        logger.info("echoStr:"+echostr);
         if(testStr.equals(signature)){
             out.println(echostr);
         }else{
-            out.println("this is servlet");
+            out.println(echostr);
         }
     }
     public static String bytetoString(byte[] digest) {
@@ -90,7 +91,9 @@ public class Login extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+       
+        PrintStream out =new PrintStream(response.getOutputStream());
+        out.println("from my local server");
     }
 
 }

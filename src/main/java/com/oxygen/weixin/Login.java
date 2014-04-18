@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +134,7 @@ public class Login extends HttpServlet {
         PrintStream out = new PrintStream(response.getOutputStream());
         String[] nonce = request.getParameterValues("nonce");
         logger.info(Arrays.toString(nonce));
-        Map map=null;
+        Map<String,String> map=new HashMap<String,String>();;
         try {
              map =Login.parseXml(request);
              logger.info(map.toString());
@@ -141,10 +142,12 @@ public class Login extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        String fromUserName = map.get("FromUserName");
+        String toUser=map.get("ToUserName");
         out.println("<xml>"
-                + "<ToUserName><![CDATA[oxygengj]]></ToUserName>"
-                + "<FromUserName><![CDATA[crazyoxygen@163.com]]></FromUserName>"
-                + "<CreateTime>201404182300</CreateTime>"
+                + "<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>"
+                + "<FromUserName><![CDATA["+toUser+"]]></FromUserName>"
+                + "<CreateTime>"+new Date().getTime()+"</CreateTime>"
                 + "<MsgType><![CDATA[text]]></MsgType>"
                 + "<Content><![CDATA[hello]]></Content>" + "</xml>");
     }
